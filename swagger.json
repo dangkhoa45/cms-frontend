@@ -1,0 +1,1625 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login success",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LoginResponseDto" }
+              }
+            }
+          },
+          "400": { "description": "Validation failed" },
+          "401": { "description": "Invalid credentials" }
+        },
+        "summary": "Authenticate user and issue JWT",
+        "tags": ["Auth"]
+      }
+    },
+    "/api/admin/users": {
+      "get": {
+        "operationId": "UsersController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "List of records returned" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "List records scoped to the current site",
+        "tags": ["Users"]
+      },
+      "post": {
+        "operationId": "UsersController_create",
+        "parameters": [],
+        "responses": {
+          "201": { "description": "Record created successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Create a record",
+        "tags": ["Users"]
+      }
+    },
+    "/api/admin/users/{id}": {
+      "get": {
+        "operationId": "UsersController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record fetched successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Get a record by id",
+        "tags": ["Users"]
+      },
+      "patch": {
+        "operationId": "UsersController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record updated successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Update a record",
+        "tags": ["Users"]
+      },
+      "delete": {
+        "operationId": "UsersController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record deleted successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Delete a record",
+        "tags": ["Users"]
+      }
+    },
+    "/api/admin/sites": {
+      "get": {
+        "operationId": "SitesController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "List of records returned" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "List records scoped to the current site",
+        "tags": ["Sites"]
+      },
+      "post": {
+        "operationId": "SitesController_create",
+        "parameters": [],
+        "responses": {
+          "201": { "description": "Record created successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Create a record",
+        "tags": ["Sites"]
+      }
+    },
+    "/api/admin/sites/{id}": {
+      "get": {
+        "operationId": "SitesController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record fetched successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Get a record by id",
+        "tags": ["Sites"]
+      },
+      "patch": {
+        "operationId": "SitesController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record updated successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Update a record",
+        "tags": ["Sites"]
+      },
+      "delete": {
+        "operationId": "SitesController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record deleted successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Delete a record",
+        "tags": ["Sites"]
+      }
+    },
+    "/api/admin/headers": {
+      "get": {
+        "operationId": "HeadersAdminController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "List of records returned" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "List records scoped to the current site",
+        "tags": ["Headers"]
+      },
+      "post": {
+        "operationId": "HeadersAdminController_create",
+        "parameters": [],
+        "responses": {
+          "201": { "description": "Record created successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Create a record",
+        "tags": ["Headers"]
+      }
+    },
+    "/api/admin/headers/{id}": {
+      "get": {
+        "operationId": "HeadersAdminController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record fetched successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Get a record by id",
+        "tags": ["Headers"]
+      },
+      "patch": {
+        "operationId": "HeadersAdminController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record updated successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Update a record",
+        "tags": ["Headers"]
+      },
+      "delete": {
+        "operationId": "HeadersAdminController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record deleted successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Delete a record",
+        "tags": ["Headers"]
+      }
+    },
+    "/api/public/sites/{siteId}/headers": {
+      "get": {
+        "operationId": "HeadersPublicController_findAll",
+        "parameters": [
+          {
+            "name": "siteId",
+            "required": true,
+            "in": "path",
+            "description": "Site identifier",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Search term applied to text-indexed fields",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Page number",
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "description": "Items per page",
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "description": "Search term applied to text-indexed fields",
+            "required": false,
+            "name": "search",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "required": false,
+            "name": "sort",
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "List of headers returned" },
+          "400": { "description": "Invalid query parameters" }
+        },
+        "summary": "Get public headers for a site",
+        "tags": ["Headers"]
+      }
+    },
+    "/api/admin/seo": {
+      "get": {
+        "operationId": "SeoAdminController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "List of records returned" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "List records scoped to the current site",
+        "tags": ["SEO"]
+      },
+      "post": {
+        "operationId": "SeoAdminController_create",
+        "parameters": [],
+        "responses": {
+          "201": { "description": "Record created successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Create a record",
+        "tags": ["SEO"]
+      }
+    },
+    "/api/admin/seo/{id}": {
+      "get": {
+        "operationId": "SeoAdminController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record fetched successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Get a record by id",
+        "tags": ["SEO"]
+      },
+      "patch": {
+        "operationId": "SeoAdminController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record updated successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Update a record",
+        "tags": ["SEO"]
+      },
+      "delete": {
+        "operationId": "SeoAdminController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record deleted successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Delete a record",
+        "tags": ["SEO"]
+      }
+    },
+    "/api/public/sites/{siteId}/seo": {
+      "get": {
+        "operationId": "SeoPublicController_findAll",
+        "parameters": [
+          {
+            "name": "siteId",
+            "required": true,
+            "in": "path",
+            "description": "Site identifier",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Search term applied to text-indexed fields",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Page number",
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "description": "Items per page",
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "description": "Search term applied to text-indexed fields",
+            "required": false,
+            "name": "search",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "required": false,
+            "name": "sort",
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "SEO settings returned" },
+          "400": { "description": "Invalid query parameters" }
+        },
+        "summary": "Get SEO settings for a site",
+        "tags": ["SEO"]
+      }
+    },
+    "/api/admin/products": {
+      "get": {
+        "operationId": "ProductsAdminController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "List of records returned" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "List records scoped to the current site",
+        "tags": ["Products"]
+      },
+      "post": {
+        "operationId": "ProductsAdminController_create",
+        "parameters": [],
+        "responses": {
+          "201": { "description": "Record created successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Create a record",
+        "tags": ["Products"]
+      }
+    },
+    "/api/admin/products/{id}": {
+      "get": {
+        "operationId": "ProductsAdminController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record fetched successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Get a record by id",
+        "tags": ["Products"]
+      },
+      "patch": {
+        "operationId": "ProductsAdminController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record updated successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Update a record",
+        "tags": ["Products"]
+      },
+      "delete": {
+        "operationId": "ProductsAdminController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record deleted successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Delete a record",
+        "tags": ["Products"]
+      }
+    },
+    "/api/public/sites/{siteId}/products": {
+      "get": {
+        "operationId": "ProductsPublicController_findAll",
+        "parameters": [
+          {
+            "name": "siteId",
+            "required": true,
+            "in": "path",
+            "description": "Site identifier",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Search term applied to text-indexed fields",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter products by status",
+            "schema": { "type": "string", "enum": ["draft", "published"] }
+          },
+          {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "description": "Filter by category id",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Page number",
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "description": "Items per page",
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "description": "Search term applied to text-indexed fields",
+            "required": false,
+            "name": "search",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "required": false,
+            "name": "sort",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Filter products by status",
+            "required": false,
+            "name": "status",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Filter by category id",
+            "required": false,
+            "name": "categoryId",
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "List of products returned" },
+          "400": { "description": "Invalid query parameters" }
+        },
+        "summary": "Get public products for a site",
+        "tags": ["Products"]
+      }
+    },
+    "/api/public/sites/{siteId}/products/{id}": {
+      "get": {
+        "operationId": "ProductsPublicController_findOne",
+        "parameters": [
+          {
+            "name": "siteId",
+            "required": true,
+            "in": "path",
+            "description": "Site identifier",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Product identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Product found" },
+          "400": { "description": "Invalid route parameters" }
+        },
+        "summary": "Get public product details",
+        "tags": ["Products"]
+      }
+    },
+    "/api/admin/services": {
+      "get": {
+        "operationId": "ServicesAdminController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "List of records returned" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "List records scoped to the current site",
+        "tags": ["Services"]
+      },
+      "post": {
+        "operationId": "ServicesAdminController_create",
+        "parameters": [],
+        "responses": {
+          "201": { "description": "Record created successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Create a record",
+        "tags": ["Services"]
+      }
+    },
+    "/api/admin/services/{id}": {
+      "get": {
+        "operationId": "ServicesAdminController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record fetched successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Get a record by id",
+        "tags": ["Services"]
+      },
+      "patch": {
+        "operationId": "ServicesAdminController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record updated successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Update a record",
+        "tags": ["Services"]
+      },
+      "delete": {
+        "operationId": "ServicesAdminController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record deleted successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Delete a record",
+        "tags": ["Services"]
+      }
+    },
+    "/api/public/sites/{siteId}/services": {
+      "get": {
+        "operationId": "ServicesPublicController_findAll",
+        "parameters": [
+          {
+            "name": "siteId",
+            "required": true,
+            "in": "path",
+            "description": "Site identifier",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Search term applied to text-indexed fields",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Page number",
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "description": "Items per page",
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "description": "Search term applied to text-indexed fields",
+            "required": false,
+            "name": "search",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "required": false,
+            "name": "sort",
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "List of services returned" },
+          "400": { "description": "Invalid query parameters" }
+        },
+        "summary": "Get public services for a site",
+        "tags": ["Services"]
+      }
+    },
+    "/api/public/sites/{siteId}/services/{id}": {
+      "get": {
+        "operationId": "ServicesPublicController_findOne",
+        "parameters": [
+          {
+            "name": "siteId",
+            "required": true,
+            "in": "path",
+            "description": "Site identifier",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Service identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Service found" },
+          "400": { "description": "Invalid route parameters" }
+        },
+        "summary": "Get public service details",
+        "tags": ["Services"]
+      }
+    },
+    "/api/admin/posts": {
+      "get": {
+        "operationId": "PostsAdminController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "List of records returned" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "List records scoped to the current site",
+        "tags": ["Posts"]
+      },
+      "post": {
+        "operationId": "PostsAdminController_create",
+        "parameters": [],
+        "responses": {
+          "201": { "description": "Record created successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Create a record",
+        "tags": ["Posts"]
+      }
+    },
+    "/api/admin/posts/{id}": {
+      "get": {
+        "operationId": "PostsAdminController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record fetched successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Get a record by id",
+        "tags": ["Posts"]
+      },
+      "patch": {
+        "operationId": "PostsAdminController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record updated successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Update a record",
+        "tags": ["Posts"]
+      },
+      "delete": {
+        "operationId": "PostsAdminController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record deleted successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Delete a record",
+        "tags": ["Posts"]
+      }
+    },
+    "/api/public/sites/{siteId}/posts": {
+      "get": {
+        "operationId": "PostsPublicController_findAll",
+        "parameters": [
+          {
+            "name": "siteId",
+            "required": true,
+            "in": "path",
+            "description": "Site identifier",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Search term applied to text-indexed fields",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Filter by post type",
+            "schema": { "type": "string", "enum": ["news", "blog"] }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter by publication status",
+            "schema": { "type": "string", "enum": ["draft", "published"] }
+          },
+          {
+            "description": "Page number",
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "description": "Items per page",
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "description": "Search term applied to text-indexed fields",
+            "required": false,
+            "name": "search",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "required": false,
+            "name": "sort",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Filter by post type",
+            "required": false,
+            "name": "type",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Filter by publication status",
+            "required": false,
+            "name": "status",
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "List of posts returned" },
+          "400": { "description": "Invalid query parameters" }
+        },
+        "summary": "Get public posts for a site",
+        "tags": ["Posts"]
+      }
+    },
+    "/api/public/sites/{siteId}/posts/{id}": {
+      "get": {
+        "operationId": "PostsPublicController_findOne",
+        "parameters": [
+          {
+            "name": "siteId",
+            "required": true,
+            "in": "path",
+            "description": "Site identifier",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Post identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Post found" },
+          "400": { "description": "Invalid route parameters" }
+        },
+        "summary": "Get public post details",
+        "tags": ["Posts"]
+      }
+    },
+    "/api/admin/contact-settings": {
+      "get": {
+        "operationId": "ContactSettingsAdminController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "List of records returned" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "List records scoped to the current site",
+        "tags": ["Contact"]
+      },
+      "post": {
+        "operationId": "ContactSettingsAdminController_create",
+        "parameters": [],
+        "responses": {
+          "201": { "description": "Record created successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Create a record",
+        "tags": ["Contact"]
+      }
+    },
+    "/api/admin/contact-settings/{id}": {
+      "get": {
+        "operationId": "ContactSettingsAdminController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record fetched successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Get a record by id",
+        "tags": ["Contact"]
+      },
+      "patch": {
+        "operationId": "ContactSettingsAdminController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record updated successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Update a record",
+        "tags": ["Contact"]
+      },
+      "delete": {
+        "operationId": "ContactSettingsAdminController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record deleted successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Delete a record",
+        "tags": ["Contact"]
+      }
+    },
+    "/api/public/sites/{siteId}/contact-settings": {
+      "get": {
+        "operationId": "ContactSettingsPublicController_findAll",
+        "parameters": [
+          {
+            "name": "siteId",
+            "required": true,
+            "in": "path",
+            "description": "Site identifier",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Search term applied to text-indexed fields",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Page number",
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "description": "Items per page",
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "description": "Search term applied to text-indexed fields",
+            "required": false,
+            "name": "search",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "required": false,
+            "name": "sort",
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Settings returned" },
+          "400": { "description": "Invalid query parameters" }
+        },
+        "summary": "Get contact settings for a site",
+        "tags": ["Contact"]
+      }
+    },
+    "/api/admin/contact-messages": {
+      "get": {
+        "operationId": "ContactMessagesAdminController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": { "description": "List of records returned" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "List records scoped to the current site",
+        "tags": ["Contact"]
+      },
+      "post": {
+        "operationId": "ContactMessagesAdminController_create",
+        "parameters": [],
+        "responses": {
+          "201": { "description": "Record created successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Create a record",
+        "tags": ["Contact"]
+      }
+    },
+    "/api/admin/contact-messages/{id}": {
+      "get": {
+        "operationId": "ContactMessagesAdminController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record fetched successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Get a record by id",
+        "tags": ["Contact"]
+      },
+      "patch": {
+        "operationId": "ContactMessagesAdminController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record updated successfully" },
+          "400": { "description": "Invalid payload or site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Update a record",
+        "tags": ["Contact"]
+      },
+      "delete": {
+        "operationId": "ContactMessagesAdminController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Record identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Record deleted successfully" },
+          "400": { "description": "Missing site context" },
+          "401": { "description": "Unauthorized access" }
+        },
+        "security": [{ "JWT-auth": [] }],
+        "summary": "Delete a record",
+        "tags": ["Contact"]
+      }
+    },
+    "/api/public/sites/{siteId}/contact-messages": {
+      "get": {
+        "operationId": "ContactMessagesPublicController_findAll",
+        "parameters": [
+          {
+            "name": "siteId",
+            "required": true,
+            "in": "path",
+            "description": "Site identifier",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Items per page",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Search term applied to text-indexed fields",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "in": "query",
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter by message status",
+            "schema": { "type": "string", "enum": ["new", "read", "resolved"] }
+          },
+          {
+            "description": "Page number",
+            "required": false,
+            "name": "page",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 1, "type": "number" }
+          },
+          {
+            "description": "Items per page",
+            "required": false,
+            "name": "limit",
+            "in": "query",
+            "schema": { "minimum": 1, "default": 25, "type": "number" }
+          },
+          {
+            "description": "Search term applied to text-indexed fields",
+            "required": false,
+            "name": "search",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Comma-separated sort instructions (field:asc|desc)",
+            "required": false,
+            "name": "sort",
+            "in": "query",
+            "schema": { "type": "string" }
+          },
+          {
+            "description": "Filter by message status",
+            "required": false,
+            "name": "status",
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "List of contact messages returned" },
+          "400": { "description": "Invalid query parameters" }
+        },
+        "summary": "List contact messages for a site",
+        "tags": ["Contact"]
+      },
+      "post": {
+        "operationId": "ContactMessagesPublicController_create",
+        "parameters": [
+          {
+            "name": "siteId",
+            "required": true,
+            "in": "path",
+            "description": "Site identifier",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateContactMessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Contact message created" },
+          "400": { "description": "Invalid payload" }
+        },
+        "summary": "Submit a contact message",
+        "tags": ["Contact"]
+      }
+    }
+  },
+  "info": {
+    "title": "CMS Multi-Site API",
+    "description": "API documentation for the Multi-Site CMS built with NestJS",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [
+    { "name": "Auth", "description": "" },
+    { "name": "Users", "description": "" },
+    { "name": "Sites", "description": "" },
+    { "name": "Products", "description": "" },
+    { "name": "Services", "description": "" },
+    { "name": "SEO", "description": "" },
+    { "name": "Headers", "description": "" },
+    { "name": "Posts", "description": "" },
+    { "name": "Contact", "description": "" }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "JWT-auth": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "description": "Enter JWT token"
+      }
+    },
+    "schemas": {
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string", "description": "User email address" },
+          "password": { "type": "string", "description": "Plain text password" }
+        },
+        "required": ["email", "password"]
+      },
+      "AuthUserResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "description": "User identifier" },
+          "email": { "type": "string", "description": "Email address" },
+          "role": {
+            "type": "string",
+            "enum": ["superadmin", "admin", "editor"],
+            "description": "Assigned role"
+          },
+          "siteIds": {
+            "description": "List of site ids the user can manage",
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["id", "email", "role", "siteIds"]
+      },
+      "LoginResponseDataDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "description": "JWT access token"
+          },
+          "user": { "$ref": "#/components/schemas/AuthUserResponseDto" }
+        },
+        "required": ["accessToken", "user"]
+      },
+      "LoginResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": { "$ref": "#/components/schemas/LoginResponseDataDto" }
+        },
+        "required": ["data"]
+      },
+      "CreateContactMessageDto": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "Sender full name" },
+          "email": { "type": "string", "description": "Sender email address" },
+          "phone": { "type": "string", "description": "Sender phone number" },
+          "message": { "type": "string", "description": "Message body" },
+          "status": {
+            "type": "string",
+            "description": "Message status",
+            "enum": ["new", "read", "resolved"]
+          }
+        },
+        "required": ["name", "email", "message"]
+      }
+    }
+  }
+}
